@@ -1,0 +1,23 @@
+﻿@model CityDtoModel
+
+<div class="container">
+    <form method="post" asp-controller="City" asp-action="Edit">
+        <div asp-validation-summary="All"></div>
+        <input asp-for="Id" hidden="hidden" />
+        <div class="form-group">
+            <label for="Name">Название города</label>
+            <input type="text" class="form-control" id="Name" placeholder="Название города" asp-for="Name">
+        </div>
+        <div class="form-group">
+            <label for="Latitude">Широта</label>
+            <input type="number" step="0.01" class="form-control" id="Latitude" placeholder="Широта" asp-for="Latitude">
+        </div>
+        <div class="form-group">
+            <label for="Longitude">Долгота</label>
+            <input type="number" step="0.01" class="form-control" id="Longitude" placeholder="Долгота" asp-for="Longitude">
+        </div>
+
+        <button type="submit" class="btn-primary">Добавить</button>
+        <a asp-controller="City" asp-action="Index" class="btn btn-primary">Назад</a>
+    </form>
+</div>

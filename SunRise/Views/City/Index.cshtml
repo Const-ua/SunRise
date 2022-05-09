@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Model.City>
+
+<a class="btn btn-primary" asp-controller="City" asp-action="Create">Новый город</a>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Город</th>
+        <th>Широта</th>
+        <th>Долгота</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var city in Model)
+        {
+            <tr>
+                <td>@city.Name</td>
+                <td>@city.Latitude</td>
+                <td>@city.Longitude</td>
+                <td>
+                    <a class="btn btn-primary" asp-controller="City" asp-action="Edit"  asp-route-id="@city.Id">Edit</a>
+                    <a class="btn btn-danger" asp-controller="City" asp-action="Delete" asp-route-id="@city.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

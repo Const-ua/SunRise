@@ -1,0 +1,42 @@
+﻿@using System.Linq
+@model IEnumerable<Model.City>
+
+<div class="text-center col-4" >
+    <h1 class="display-4">Восход/закат</h1>
+    <form method="post" asp-controller="Home" asp-action="EventTime">
+        <div>
+            <select class="form-select" name="id" id="id" value="@ViewBag.CurrentCity">
+                @foreach (var city in Model)
+                {
+                    <option value="@city.Id">@city.Name</option>
+                }
+            </select>
+        </div>
+        <br />
+        <div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="action"  value="1" id="SunRise"  checked>
+                <label class="form-check-label" for="SunRise">
+                    @ViewBag.SunRise
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="action" value="2" id="SunSet">
+                <label class="form-check-label" for="SunSet">
+                    @ViewBag.SunSet
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="action" value="3"  id="Both" >
+                <label class="form-check-label" for="Both">
+                    @ViewBag.Both
+                </label>
+            </div>
+        </div>
+        <br />
+        <button type="submit">Получить</button> 
+        <p class="text-danger">@ViewBag.ErrorMessage</p>
+    </form>
+    <br />
+    <a class="btn btn-primary" asp-controller="City" asp-action="Index">Города</a>
+</div>
