@@ -59,7 +59,7 @@ namespace SunRise.Controllers
                 _logger.LogError((string)ViewBag.ErrorMessage);
                 return View("Index",_city.GetAll(orderBy: r => r.OrderBy(t => t.Name)));
             }
-
+      
             HttpClient client = new HttpClient();
             try
             {
@@ -67,16 +67,19 @@ namespace SunRise.Controllers
                 GetResponse response = JsonSerializer.Deserialize<GetResponse>(responseBody);
                 if (response.status == "OK")
                 {
+                    TimeZoneInfo cstZone = TimeZoneInfo.FindSystemTimeZoneById("E. Europe Standard Time");
+                    DateTime sunRiseLocalTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(response.results.sunrise), cstZone);
+                    DateTime sunSetLocalTime = TimeZoneInfo.ConvertTimeFromUtc(Convert.ToDateTime(response.results.sunset), cstZone);                        
                     switch(action)
                     {
-                        case AppConstants.SunRise: 
-                            ViewBag.SunRise += " "+response.results.sunrise;
+                        case AppConstants.SunRise:
+                            ViewBag.SunRise += " " + sunRiseLocalTime.ToString("HH:mm");
                             break;
                         case AppConstants.SunSet:
-                            ViewBag.SunSet += " "+response.results.sunset;
+                            ViewBag.SunSet += " " + sunSetLocalTime.ToString("HH:mm");
                             break;
                         case AppConstants.Both:
-                            ViewBag.Both += " "+response.results.sunrise+" / " + response.results.sunset;
+                            ViewBag.Both += " "+ sunRiseLocalTime.ToString("HH:mm")+" / " +  sunSetLocalTime.ToString("HH:mm");
                             break;
                     }
                 }

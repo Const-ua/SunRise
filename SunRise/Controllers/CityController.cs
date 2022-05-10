@@ -22,16 +22,10 @@ namespace SunRise.Controllers
             return View(_city.GetAll(orderBy: r=>r.OrderBy(c=>c.Name)));
         }
 
-        // GET: CityController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CityController/Create
+      // GET: CityController/Create
         public ActionResult Create()
         {
-            CityDtoModel model = new CityDtoModel();
+            CityDtoModel model = new ();
             return View(model);
         }
 
@@ -42,7 +36,7 @@ namespace SunRise.Controllers
         {
             if (ModelState.IsValid)
             {
-                City city = new City
+                City city = new()
                 {
                     Name = model.Name,
                     Latitude = model.Latitude,
@@ -63,7 +57,7 @@ namespace SunRise.Controllers
             City city = _city.FirstOrDefault(r => r.Id == id);
             if (city != null)
             {
-                CityDtoModel model = new CityDtoModel
+                CityDtoModel model = new ()
                 {
                     Id = city.Id,
                     Name = city.Name,
