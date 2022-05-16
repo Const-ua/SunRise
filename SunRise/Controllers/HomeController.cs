@@ -23,7 +23,6 @@ namespace SunRise.Controllers
 
         public IActionResult Index()
         {
-            _logger.LogError("Just check log4net logging to file.");
             ViewBag.ErrorMessage = "";
             ViewBag.SunRise = "Восход";
             ViewBag.SunSet = "Закат";
